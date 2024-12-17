@@ -10,6 +10,15 @@
     <link href="//cdn.qwqo.cn/file/spigotcn/assets/main.css" rel="stylesheet">
     <link href="//cdn.qwqo.cn/file/spigotcn/assets/resources.css" rel="stylesheet">
     <meta property="og:url" content="https://spigotmc.tech/resources.html" />
+    <style>
+    .pre{
+      display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #abb2bf;
+  background: #282c34;
+}
+</style>
 </head>
 
 <body>
@@ -81,6 +90,9 @@
                 '\\[url=(.+?)\\](.+?)\\[/url\\]': '<a href="$1">$2</a>',
                 '\\[a=(.+?)\\](.+?)\\[/a\\]': '<a href="$1" name="$1">$2</a>',
                 '\\[list\\](.+?)\\[/list\\]': '<ul>$1</ul>',
+                '\\n': '<br>',
+                '\\[code\\](.+?)\\[/code\\]': '<pre><code>$1</code></pre>', 
+                '\\[code=(.+?)\\](.+?)\\[/code\\]': '<pre><code class="$1">$2</code></pre>',
                 '\\[\\*\\](.+?)\\[/\\*\\]': '<li>$1</li>'
             };
 
