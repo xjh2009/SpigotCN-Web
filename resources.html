@@ -56,7 +56,7 @@
             function translateResource() {
                 if (!!window.EventSource) {
                     var source = new EventSource('https://translate.spigotmc.tech/?id='+ window.location.hash.substring(1));
-                    document.getElementById('resourceDescription').innerHTML = '正在翻译...';
+                    document.getElementById('resourceDescription').innerHTML = '';
 
                     // 监听 message 事件  
                     source.onmessage = function (event) {
@@ -82,6 +82,7 @@
                         console.error("EventSource failed.", error);
                     };
                 } else {
+                    document.getElementById('resourceDescription').innerHTML = '浏览器好像不支持翻译';
                     console.error("浏览器好像不支持");
                 }
             }
