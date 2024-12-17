@@ -54,6 +54,43 @@
     </main>
     <script src="//cdn.qwqo.cn/file/spigotcn/assets/resources.js"></script>
         <script>
+            function bbcodeToHtml(bbcode) {
+    // 定义 BBCode 转 HTML 的规则
+    const rules = {
+        '\\[br\\]': '<br>',
+        '\\[b\\](.+?)\\[/b\\]': '<strong>$1</strong>',
+        '\\[i\\](.+?)\\[/i\\]': '<em>$1</em>',
+        '\\[u\\](.+?)\\[/u\\]': '<u>$1</u>',
+        '\\[h1\\](.+?)\\[/h1\\]': '<h1>$1</h1>',
+        '\\[h2\\](.+?)\\[/h2\\]': '<h2>$1</h2>',
+        '\\[h3\\](.+?)\\[/h3\\]': '<h3>$1</h3>',
+        '\\[h4\\](.+?)\\[/h4\\]': '<h4>$1</h4>',
+        '\\[h5\\](.+?)\\[/h5\\]': '<h5>$1</h5>',
+        '\\[h6\\](.+?)\\[/h6\\]': '<h6>$1</h6>',
+        '\\[p\\](.+?)\\[/p\\]': '<p>$1</p>',
+        '\\[code\\](.+?)\\[/code\\]': '<pre>$1</pre>',
+        '\\[color=(.+?)\\](.+?)\\[/color\\]': '<span style="color:$1">$2</span>',
+        '\\[size=([0-9]+)\\](.+?)\\[/size\\]': '<span style="font-size:$1px">$2</span>',
+        '\\[img\\](.+?)\\[/img\\]': '<img src="$1">',
+        '\\[img=(.+?)\\]': '<img src="$1">',
+        '\\[email\\](.+?)\\[/email\\]': '<a href="mailto:$1">$1</a>',
+        '\\[email=(.+?)\\](.+?)\\[/email\\]': '<a href="mailto:$1">$2</a>',
+        '\\[url\\](.+?)\\[/url\\]': '<a href="$1">$1</a>',
+        '\\[url=(.+?)\\|onclick\\](.+?)\\[/url\\]': '<a onclick="$1">$2</a>',
+        '\\[url=(.+?)\\starget=(.+?)\\](.+?)\\[/url\\]': '<a href="$1" target="$2">$3</a>',
+        '\\[url=(.+?)\\](.+?)\\[/url\\]': '<a href="$1">$2</a>',
+        '\\[a=(.+?)\\](.+?)\\[/a\\]': '<a href="$1" name="$1">$2</a>',
+        '\\[list\\](.+?)\\[/list\\]': '<ul>$1</ul>',
+        '\\[\\*\\](.+?)\\[/\\*\\]': '<li>$1</li>'
+    };
+
+    // 遍历规则并替换 BBCode 为 HTML
+    for (const [regex, replacement] of Object.entries(rules)) {
+        bbcode = bbcode.replace(new RegExp(regex, 'g'), replacement);
+    }
+
+    return bbcode;
+}
             function translateResource() {
                 if (!!window.EventSource) {
                     var source = new EventSource('https://translate.spigotmc.tech/?id='+ window.location.hash.substring(1));
@@ -65,10 +102,7 @@
                         // 判断是否返回了 "OK"，如果是则停止请求
                         if (event.data === 'OK') {
                             source.close(); // 关闭事件源连接
-                            import html5Preset from '@bbob/preset-html5/es'
-                            import { render } from '@bbob/html/es'
-                            import bbob from '@bbob/core'
-                            document.getElementById('resourceDescription').innerHTML = bbob(html5Preset()).process(document.getElementById('resourceDescription').innerHTML, { render }).html
+                            document.getElementById('resourceDescription').innerHTML = bbcodeToHtml(document.getElementById('resourceDescription').innerHTML)
                             console.log("翻译结束");
                         } else {
                             // 否则继续显示数据
