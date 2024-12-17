@@ -1,52 +1,97 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>SpigotCN - 资源详情</title>
-	<link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-3-M/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-	<link href="//cdn.qwqo.cn/file/spigotcn/assets/main.css" rel="stylesheet">
-	<link href="//cdn.qwqo.cn/file/spigotcn/assets/resources.css" rel="stylesheet">
-	<meta property="og:url" content="https://spigotmc.tech/resources.html" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpigotCN - 资源详情</title>
+    <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-3-M/bootstrap/5.1.3/css/bootstrap.min.css"
+        rel="stylesheet">
+    <link href="//cdn.qwqo.cn/file/spigotcn/assets/main.css" rel="stylesheet">
+    <link href="//cdn.qwqo.cn/file/spigotcn/assets/resources.css" rel="stylesheet">
+    <meta property="og:url" content="https://spigotmc.tech/resources.html" />
 </head>
+
 <body>
-	<header class="bg-dark-custom p-3 border-bottom">
-		<div class="container">
-			<div class="d-flex flex-wrap align-items-center justify-content-between">
-				<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-					<span class="fs-4">SpigotCN</span>
-				</a>
-				<div class="search-form d-flex">
-					<input type="search" id="search" class="form-control me-2" placeholder="搜索..." aria-label="Search">
-					<button class="btn btn-outline-light" type="submit" onclick="search();">搜索</button>
-					<a href="https://www.yuque.com/xjhya-sorxe/sv59oh/pcv2te9o9fkalvus" target="_blank" class="btn text-white" >关于</a>
-				</div>
-			</div>
-		</div>
-	</header>
-	<main class="container my-5">
-		<div class="row">
-			<aside class="col-md-12">
-				<h4>资源详情</h4>
-				<section class="col-md-12 resources" id="data1">
-					<div class="resource-header">
-						<h2 id="resourceTitle"></h2>
-						<div>
-							<a id='toSpigotMC' class="btn btn-primary">前往SpigotMC</a>
-							<a onclick="updateimg();" class="btn btn-primary">修复显示图片</a>
-							<a id="downloadButton" href="#" class="btn btn-primary">下载资源</a>
-						</div>
-					</div>
-					<p id="resourceTag"></p>
-					<p><strong>作者:</strong> <span id="resourceAuthor"></span>/<strong>发布时间:</strong> <span id="resourceReleaseDate"></span>/<strong>更新时间:</strong> <span id="resourceUpdateDate"></span>/<strong>下载量:</strong> <span id="resourceDownloads"></span>/<span id="resourcePrice"></span></p>
-					<div id="resourceDescription"></div>
-				</section>
-			</aside>
-		</div>
-	</main>
-	<script src="//cdn.qwqo.cn/file/spigotcn/assets/resources.js"></script>
-	<script defer src="https://analytic.giao.bf/script.js" data-website-id="6a4689d2-6af3-4f23-b5bb-194fad96eb0a"></script>
-	<script src="//cdn.qwqo.cn/file/mczyw/assets/js/popper.min.js"></script>
-	<script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-3-M/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+    <header class="bg-dark-custom p-3 border-bottom">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-between">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <span class="fs-4">SpigotCN</span>
+                </a>
+                <div class="search-form d-flex">
+                    <input type="search" id="search" class="form-control me-2" placeholder="搜索..." aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit" onclick="search();">搜索</button>
+                    <a href="https://www.yuque.com/xjhya-sorxe/sv59oh/pcv2te9o9fkalvus" target="_blank"
+                        class="btn text-white">关于</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="container my-5">
+        <div class="row">
+            <aside class="col-md-12">
+                <h4>资源详情</h4>
+                <section class="col-md-12 resources" id="data1">
+                    <div class="resource-header">
+                        <h2 id="resourceTitle"></h2>
+                        <div>
+                            <a id='toSpigotMC' class="btn btn-primary">前往SpigotMC</a>
+                            <a onclick="updateimg();" class="btn btn-primary">修复显示图片</a>
+                            <a onclick="translate();" class="btn btn-primary">翻译(Beta)</a>
+                            <a id="downloadButton" href="#" class="btn btn-primary">下载资源</a>
+                        </div>
+                    </div>
+                    <p id="resourceTag"></p>
+                    <p><strong>作者:</strong> <span id="resourceAuthor"></span>/<strong>发布时间:</strong> <span
+                            id="resourceReleaseDate"></span>/<strong>更新时间:</strong> <span
+                            id="resourceUpdateDate"></span>/<strong>下载量:</strong> <span
+                            id="resourceDownloads"></span>/<span id="resourcePrice"></span></p>
+                    <div id="resourceDescription"></div>
+                </section>
+            </aside>
+        </div>
+    </main>
+        <script>
+            function translate() {
+                if (!!window.EventSource) {
+                    var source = new EventSource('https://translate.spigotmc.tech/?id='+ window.location.hash.substring(1));
+                    document.getElementById('resourceDescription').innerHTML = '正在翻译...';
+
+                    // 监听 message 事件  
+                    source.onmessage = function (event) {
+
+                        // 判断是否返回了 "OK"，如果是则停止请求
+                        if (event.data === 'OK') {
+                            source.close(); // 关闭事件源连接
+                            console.log("翻译结束");
+                        } else {
+                            // 否则继续显示数据
+                            var data = JSON.parse(event.data);
+                            document.getElementById('resourceDescription').innerHTML += data.response;
+                        }
+                    };
+
+                    // 可选：监听 open 事件（连接打开）
+                    source.onopen = function () {
+                        console.log("翻译开始");
+                    };
+
+                    // 可选：监听 error 事件（发生错误）
+                    source.onerror = function (error) {
+                        console.error("EventSource failed.", error);
+                    };
+                } else {
+                    console.error("浏览器好像不支持");
+                }
+            }
+
+        </script>
+    <script src="//cdn.qwqo.cn/file/spigotcn/assets/resources.js"></script>
+    <script defer src="https://analytic.giao.bf/script.js"
+        data-website-id="6a4689d2-6af3-4f23-b5bb-194fad96eb0a"></script>
+    <script src="//cdn.qwqo.cn/file/mczyw/assets/js/popper.min.js"></script>
+    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-3-M/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 </body>
+
 </html>
