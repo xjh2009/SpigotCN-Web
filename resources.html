@@ -86,9 +86,8 @@
 
             // 遍历规则并替换 BBCode 为 HTML
             for (const [regex, replacement] of Object.entries(rules)) {
-                bbcode = bbcode.replace(new RegExp(regex, 'g'), replacement);
+                bbcode = bbcode.replace(new RegExp(regex, 'gi'), replacement);
             }
-            console.log(bbcode)
             return bbcode;
         }
         function translateResource() {
