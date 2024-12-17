@@ -64,6 +64,8 @@
                         // 判断是否返回了 "OK"，如果是则停止请求
                         if (event.data === 'OK') {
                             source.close(); // 关闭事件源连接
+                            const parser = new BBCodeParser.default();
+                            document.getElementById('resourceDescription').innerHTML = parser.parseString(document.getElementById('resourceDescription').innerHTML)
                             console.log("翻译结束");
                         } else {
                             // 否则继续显示数据
@@ -88,6 +90,7 @@
             }
 
         </script>
+    <script src="https://cdn.jsdelivr.net/npm/bbcode-parser@latest/dist/bbcode-parser.min.js"></script>
     <script src="//cdn.qwqo.cn/file/spigotcn/assets/resources.js"></script>
     <script defer src="https://analytic.giao.bf/script.js"
         data-website-id="6a4689d2-6af3-4f23-b5bb-194fad96eb0a"></script>
