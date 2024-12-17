@@ -1,0 +1,19 @@
+body {
+	background-color: #2c3e50;
+	/* 黑灰色背景 */
+	color: #fff;
+	/* 文字颜色设为白色 */
+}
+
+.bg-dark-custom {
+	background-color: #343a40;
+	/* 导航栏背景色稍微浅一点 */
+}
+
+.search-form input {
+	width: 300px;
+	/* 设置搜索框宽度 */
+}
+.resources a {
+	text-decoration: none;
+}

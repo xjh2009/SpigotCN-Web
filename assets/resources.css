@@ -1,0 +1,42 @@
+.btn {
+    float: right;
+}
+
+.resources {
+    background-color: #fff;
+    /* 白底 */
+    border-radius: 10px;
+    /* 圆边 */
+    padding: 20px;
+    color: #000;
+    /* 文字颜色设为黑色 */
+}
+
+.resource-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bbCodeImage {
+    max-width: 100%;
+}
+
+pre {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    color: #abb2bf;
+    background: #282c34;
+}
+.quoteContainer {
+    overflow: hidden;
+    position: relative;
+    font-style: italic;
+    font-size: 9pt;
+    background-color: rgb(251, 251, 251);
+    background-repeat: repeat-x;
+    background-position: top;
+    padding: 8px;
+    border-left: 2px solid rgb(133, 133, 133);
+}
