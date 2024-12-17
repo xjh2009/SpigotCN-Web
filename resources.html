@@ -52,8 +52,6 @@
             </aside>
         </div>
     </main>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bbcode-parser@latest/dist/bbcode-parser.min.js"></script>
     <script src="//cdn.qwqo.cn/file/spigotcn/assets/resources.js"></script>
         <script>
             function translateResource() {
@@ -67,8 +65,10 @@
                         // 判断是否返回了 "OK"，如果是则停止请求
                         if (event.data === 'OK') {
                             source.close(); // 关闭事件源连接
-                            const parser = new BBCodeParser.default();
-                            document.getElementById('resourceDescription').innerHTML = parser.parseString(document.getElementById('resourceDescription').innerHTML)
+                            import html5Preset from '@bbob/preset-html5/es'
+                            import { render } from '@bbob/html/es'
+                            import bbob from '@bbob/core'
+                            document.getElementById('resourceDescription').innerHTML = bbob(html5Preset()).process(document.getElementById('resourceDescription').innerHTML, { render }).html
                             console.log("翻译结束");
                         } else {
                             // 否则继续显示数据
