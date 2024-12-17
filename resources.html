@@ -38,7 +38,7 @@
                         <div>
                             <a id='toSpigotMC' class="btn btn-primary">前往SpigotMC</a>
                             <a onclick="updateimg();" class="btn btn-primary">修复显示图片</a>
-                            <a onclick="translate();" class="btn btn-primary">翻译(Beta)</a>
+                            <a onclick="translateResource();" class="btn btn-primary">翻译(Beta)</a>
                             <a id="downloadButton" href="#" class="btn btn-primary">下载资源</a>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
         </div>
     </main>
         <script>
-            function translate() {
+            function translateResource() {
                 if (!!window.EventSource) {
                     var source = new EventSource('https://translate.spigotmc.tech/?id='+ window.location.hash.substring(1));
                     document.getElementById('resourceDescription').innerHTML = '正在翻译...';
