@@ -11,14 +11,14 @@
     <link href="//cdn.qwqo.cn/file/spigotcn/assets/resources.css" rel="stylesheet">
     <meta property="og:url" content="https://spigotmc.tech/resources.html" />
     <style>
-    .pre{
-      display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  color: #abb2bf;
-  background: #282c34;
-}
-</style>
+        .pre {
+            display: block;
+            overflow-x: auto;
+            padding: 0.5em;
+            color: #abb2bf;
+            background: #282c34;
+        }
+    </style>
 </head>
 
 <body>
@@ -91,16 +91,28 @@
                 '\\[a=(.+?)\\](.+?)\\[/a\\]': '<a href="$1" name="$1">$2</a>',
                 '\\[list\\](.+?)\\[/list\\]': '<ul>$1</ul>',
                 '\\n': '<br>',
-                '\\[code\\](.+?)\\[/code\\]': '<pre><code>$1</code></pre>', 
+                '\\[code\\](.+?)\\[/code\\]': (match, code) => {
+                    // 转义特殊字符并保留格式
+                    const escapedCode = escapeHtml(code);
+                    return `<pre><code>${escapedCode}</code></pre>`;
+                },
                 '\\[code=(.+?)\\](.+?)\\[/code\\]': '<pre><code class="$1">$2</code></pre>',
                 '\\[\\*\\](.+?)\\[/\\*\\]': '<li>$1</li>'
             };
 
             // 遍历规则并替换 BBCode 为 HTML
             for (const [regex, replacement] of Object.entries(rules)) {
-                bbcode = bbcode.replace(new RegExp(regex, 'gi'), replacement);
+                bbcode = bbcode.replace(new RegExp(regex, 'gis'), replacement);
             }
             return bbcode;
+        }
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, '&amp;')    // 转义 &
+                .replace(/</g, '&lt;')    // 转义 <
+                .replace(/>/g, '&gt;')    // 转义 >
+                .replace(/ /g, '&nbsp;')  // 转义空格
+                .replace(/\n/g, '<br>');  // 转义换行符
         }
         function translateResource() {
             if (!!window.EventSource) {
